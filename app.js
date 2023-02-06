@@ -1,7 +1,7 @@
 const https = require('https');
 const JSSoup = require('jssoup').default;
 const fs = require('fs');
-const url = ""; // FIRST: find a url of a page you are interested in from wikipedia 
+const url = "https://en.wikipedia.org/wiki/Crypto-anarchism"; // FIRST: find a url of a page you are interested in from wikipedia 
 const jsonPath = "./json/"; 
 const name = "WebScrape";
 
@@ -25,7 +25,7 @@ function getParagraphText(soupTag){
 
       
 
-        if(p.indexOf("plant") != -1){ //if text has plant
+        if(p.indexOf("computer") != -1){ //if text has plant
         console.log(p);
         text += p;
         sentence = text.split('. ')
@@ -86,7 +86,9 @@ function createSoup(document){
     data.content = {
         "text": getParagraphText(main)
     };
-        
+    data.links = {
+        "text": getAllExternalLinks(main)
+    };  
     //output json
     writeJSON(data);
 
